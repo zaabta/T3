@@ -5,16 +5,21 @@ import { FormEvent } from "react";
 import { loginSchema } from "y/types";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 const Home: NextPage = () => {
-
+  const router = useRouter()
   const handleOnSubmit = async (e:FormEvent) => {
     e.preventDefault()
     const userDateObj = Object.fromEntries(new FormData(e.target as HTMLFormElement)) 
     const input = await loginSchema.safeParseAsync(userDateObj)
     if(!input.success) input.error.errors.map(err => toast.error(err.message))
     else {
-      const res = await signIn("credentials", {...userDateObj, callbackUrl: "/quote", redirect: true})
-      console.log(res)
+      const res = await signIn("credentials", {...userDateObj, redirect: false})
+      if(!res?.ok) toast.error("Could not login please check your account name or email and password")
+      else {
+        toast.success("login successfully")
+        router.push("/quote")
+      }
     }
   }
 

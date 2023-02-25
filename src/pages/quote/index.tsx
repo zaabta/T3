@@ -1,69 +1,67 @@
 import { api } from 'y/utils/api'
-import { Menu } from 'y/pages/components/menu'
-import { Dropdown } from '../components/Dropdown'
-import { QuoteList } from '../components/QuoteList'
 import { useState } from 'react'
 import { quoteInput } from 'y/types'
 import { toast } from 'react-hot-toast'
+import { PostFilter } from '../components/PostFilter'
+import { Post } from '../components/SinglePost'
+import { Pagination } from '../components/Pagination'
+import { UserList } from '../components/UserList'
+import { CategoryList } from '../components/CategoryList'
+import { RecentPost } from '../components/RecentPost'
+import { CreatePost } from "../components/CreatePost"
+import { PostList } from "../components/PostList"
 
 const Quotes = () => {
-  const [newQuoteData, setQuoteData] = useState<{categoryId?: string, content?: string}>()
+  const [newQuoteData, setQuoteData] = useState<{
+    categoryId?: string
+    content?: string
+  }>()
   const categories = api.category.all.useQuery()
-  const trpc = api.useContext()
-  const quotes = api.quote.all.useQuery({ page: 1 })
-  const { mutate } = api.quote.create.useMutation({
-    onSettled: async() => {
-      await trpc.quote.all.invalidate()
-      setQuoteData({categoryId: "0", content: ""})
-    },
-    onSuccess: (res)=> {
-      toast.success(res.messages)
-    }
-  })
 
-  const createQuote = async () => {
-    const input  = await quoteInput.safeParse(newQuoteData)
-    if(input.success) {
-      mutate(input.data)
-    }
-    else input.error.errors.map(err => toast.error(err.message))
-  }
+  const quotes = api.quote.all.useQuery({ page: 1 })
   
+
   const handleOnChangeCategory = (id: string): void => {
-    setQuoteData({...newQuoteData, categoryId: id})
+    setQuoteData({ ...newQuoteData, categoryId: id })
   }
 
   return (
-    <div className="flex flex-row w-full justify-between">
-      <Menu list={categories.data?.data}/>
-      <div className="flex flex-col align-middel justify-center gap-5  w-full  h-screen">
-        <div className="flex flex-col bg-white px-8 py-6 w-96 mx-auto rounded-lg shadow-lg">
-          <div className="flex justify-center items-center">
-            <Dropdown selecteItem={newQuoteData?.categoryId} categories={categories.data?.data}  onChange={handleOnChangeCategory}/>
+    <div className="bg-gray-100 px-6 py-8">
+      <div className="flex justify-between container mx-auto">
+        <div className="w-full lg:w-8/12">
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-bold text-gray-700 md:text-2xl">
+              Quote
+            </h1>
+            <PostFilter />
           </div>
-          <div className="mt-4">
-            <textarea className="text-lg text-gray-700 font-medium pl-2 border border-stone-700 rounded-md focus:outline-none h-32 w-full  resize-none"
-            value={newQuoteData?.content}
-            onChange={(e) => setQuoteData({...newQuoteData, content: e.target.value})}
-             />
+          <div className="mt-16">
+            <CreatePost categoryList={categories?.data?.data}/>
           </div>
-          <div className="flex justify-between items-center mt-4">
-            <div className="flex items-center">
-              <input
-                type="button"
-                value={'create'}
-                onClick={createQuote}
-                className="uppercase inline-block mt-2 text-sm bg-slate-500 py-2 px-4 rounded font-semibold cursor-pointer hover:bg-indigo-100"
-              />
-            </div>
-            <span className="font-light text-sm text-gray-600">
-              {Date().toString().substring(0, 10)}
-            </span>
+          <div className="mt-16">
+            <PostList list={quotes.data?.data}/>
+          </div>  
+          <div className="mt-8">
+            <Pagination />
           </div>
         </div>
-        <QuoteList
-          quotes={quotes.data?.data}
-        />
+        {/*Right side*/}
+        <div className="-mx-8 w-4/12 hidden lg:block">
+          <div className="px-8">
+            <h1 className="mb-4 text-xl font-bold text-gray-700">Authors</h1>
+            <UserList />
+          </div>
+          <div className="mt-10 px-8">
+            <h1 className="mb-4 text-xl font-bold text-gray-700">Categories</h1>
+            <CategoryList list={categories?.data?.data}/>
+          </div>
+          <div className="mt-10 px-8">
+            <h1 className="mb-4 text-xl font-bold text-gray-700">
+              Recent Post
+            </h1>
+            <RecentPost />
+          </div>
+        </div>
       </div>
     </div>
   )

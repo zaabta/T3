@@ -66,6 +66,7 @@ export const userRouter = createTRPCRouter({
         },
       },
     });
-    return currUser ? res.success("got profile sucessfully", currUser): null;
+    return currUser ? res.successWithMessage("got your profile successfully :)", currUser):
+    res.failedWithMessage("failed to get your profile :(")
   }),
 });

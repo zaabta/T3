@@ -6,6 +6,8 @@ import "y/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { AppPropsWithAuth } from "y/types";
 import { Auth } from "y/pages/components/layout/Auth";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 
 const MyApp = ({
   Component,
@@ -16,7 +18,11 @@ const MyApp = ({
       {
         Component.requireAuth ? (
           <Auth>
+            <>
+              <Navbar/>
               <Component {...pageProps} />
+              <Footer/>
+            </>
           </Auth>
         ): (<Component {...pageProps} />)
       }

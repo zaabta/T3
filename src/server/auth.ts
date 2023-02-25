@@ -10,6 +10,7 @@ import { verify } from "argon2";
 import { prisma } from "y/server/db";
 import { loginSchema } from "y/types";
 import { env } from "y/env.mjs";
+import { chownSync } from "fs";
 
 
 /**
@@ -78,14 +79,10 @@ export const authOptions: NextAuthOptions = {
             where: {
               OR: [
                 {
-                  email: {
-                    contains: creds?.account,
-                  },
+                  email: creds.account
                 },
                 {
-                  username: {
-                    contains: creds?.account,
-                  },
+                  username: creds.account,
                 },
               ],
             },

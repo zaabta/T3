@@ -38,7 +38,10 @@ export type Props = {
 };
 
 export const quoteInput = z.object({
-  categoryId: z.string({ required_error: "choose the category of your quote" }),
+  title: z.string({ required_error: "The title is required" }),
+  categoryId: z.string({ required_error: "choose the category of your quote" }).trim().min(1,{
+    message: "choose the category of your quote"
+  }),
   content: z.string({ required_error: "quote is required!" }).min(3, {
     message: "Must be 3 or more characters long",
   }),
@@ -67,7 +70,11 @@ export type SingleQuoteProps = {
   category: {id: string, name: string}
 }
 
-export type CategoryDate = {
+export type CategoryProps = {
+  list?: Category[]
+}
+
+export type Category = {
   id: string,
   name: string
 }
@@ -75,14 +82,15 @@ export type CategoryDate = {
 export type UserData = {
   id: string,
   username: string,
-  image: string
+  image?: string
 }
 
 
 export type SingleQuoteData = {
   id: string,
+  title: string,
   content: string,
-  category: CategoryDate,
+  category: Category,
   createdAt: Date,
   user: UserData
 }

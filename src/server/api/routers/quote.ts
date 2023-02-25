@@ -9,6 +9,7 @@ export const quoteRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const newQuote = await ctx.prisma.quote.create({
         data: {
+          title: input.title,
           content: input.content,
           categoryId: input.categoryId,
           userId: ctx.session.user.id,
@@ -24,7 +25,7 @@ export const quoteRouter = createTRPCRouter({
         page: z
           .number({ required_error: "the number of page is requird" })
           .min(0, {
-            message: "page number should be !",
+            message: "page number should be 1 or more !",
           }),
       })
     )
@@ -32,27 +33,23 @@ export const quoteRouter = createTRPCRouter({
       const quotes = await ctx.prisma.quote.findMany({
         where: {
           deletedAt: null,
-          category:{
-            deletedAt: null
-          }
-        },
-        orderBy: [
-          {
-            createdAt: "desc",
+          category: {
+            deletedAt: null,
           },
-        ],
+        },
+        orderBy: [{ createdAt: "desc" }],
         take: 3,
-        skip: input.page - 1 > 0 ? input.page - 1 : 0,
+        skip: input.page - 1,
         select: {
           id: true,
+          title: true,
           content: true,
           createdAt: true,
-          user: {
-            select: {
+          user:{
+            select:{
               id: true,
-              username: true,
-              email: true,
-            },
+            username: true,
+          }
           },
           category: {
             select: {
@@ -62,9 +59,26 @@ export const quoteRouter = createTRPCRouter({
           },
         },
       });
+      console.log(quotes);
       return quotes.length > 0
         ? res.successWithMessage("get the quotes successfully", quotes)
         : res.failedWithMessage("failed to create new quote");
+    }),
+  getSingleQuote: protectedProcedure
+    .input(
+      z.object({
+        quoteId: z.string({ required_error: "select the qoute please !" }),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const singleQuote = await ctx.prisma.quote.findUnique({
+        where: {
+          id: input.quoteId,
+        },
+      });
+      return singleQuote
+        ? res.successWithMessage("get it sucessfully", singleQuote)
+        : res.failedWithMessage("failed to get it");
     }),
   myQuotes: protectedProcedure.query(async ({ ctx }) => {
     const myQuotes = await ctx.prisma.quote.findMany({
@@ -72,12 +86,15 @@ export const quoteRouter = createTRPCRouter({
         userId: ctx.session.user.id,
         deletedAt: null,
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
         category: {
           select: {
-            createdAt: false,
-            updateAt: false,
-            deletedAt: false,
+            id: true,
+            name: true,
           },
         },
       },
@@ -89,6 +106,7 @@ export const quoteRouter = createTRPCRouter({
   update: protectedProcedure
     .input(
       z.object({
+        title: z.string({ required_error: "title is required" }),
         quoteId: z.string({ required_error: "quoteId is required" }),
         content: z.string({ required_error: "content is required" }),
         categoryId: z.string({ required_error: "category is required" }),
@@ -159,7 +177,7 @@ export const quoteRouter = createTRPCRouter({
       const quotes = await ctx.prisma.quote.findMany({
         where: {
           categoryId: input.name,
-          deletedAt: null
+          deletedAt: null,
         },
         select: {
           id: true,
