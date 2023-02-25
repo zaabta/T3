@@ -30,38 +30,50 @@ export const quoteRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      const quotes = await ctx.prisma.quote.findMany({
-        where: {
-          deletedAt: null,
-          category: {
+      const take = 3;
+      const quotes = await ctx.prisma.$transaction([
+        ctx.prisma.quote.count({
+          where: { deletedAt: null, category: { deletedAt: null } },
+        }),
+        ctx.prisma.quote.findMany({
+          where: {
             deletedAt: null,
-          },
-        },
-        orderBy: [{ createdAt: "desc" }],
-        take: 3,
-        skip: input.page - 1,
-        select: {
-          id: true,
-          title: true,
-          content: true,
-          createdAt: true,
-          user:{
-            select:{
-              id: true,
-            username: true,
-          }
-          },
-          category: {
-            select: {
-              id: true,
-              name: true,
+            category: {
+              deletedAt: null,
             },
           },
-        },
-      });
-      console.log(quotes);
+          orderBy: [{ createdAt: "desc" }],
+          take,
+          skip: (input.page - 1) * take,
+          select: {
+            id: true,
+            title: true,
+            content: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+              },
+            },
+            category: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        }),
+      ]);
       return quotes.length > 0
-        ? res.successWithMessage("get the quotes successfully", quotes)
+        ? res.successWithMessage("get the quotes successfully", {
+            quotes: quotes[1],
+            mate: {
+              totalPageCount: Math.ceil(quotes[0] / take),
+              currentPage: input.page,
+              totalQuote: quotes[0],
+            },
+          })
         : res.failedWithMessage("failed to create new quote");
     }),
   getSingleQuote: protectedProcedure

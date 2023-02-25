@@ -8,22 +8,14 @@ import { Pagination } from '../components/Pagination'
 import { UserList } from '../components/UserList'
 import { CategoryList } from '../components/CategoryList'
 import { RecentPost } from '../components/RecentPost'
-import { CreatePost } from "../components/CreatePost"
-import { PostList } from "../components/PostList"
+import { CreatePost } from '../components/CreatePost'
+import { PostList } from '../components/PostList'
 
 const Quotes = () => {
-  const [newQuoteData, setQuoteData] = useState<{
-    categoryId?: string
-    content?: string
-  }>()
+  const [ page, setPage] = useState<number>(1)
   const categories = api.category.all.useQuery()
 
-  const quotes = api.quote.all.useQuery({ page: 1 })
-  
-
-  const handleOnChangeCategory = (id: string): void => {
-    setQuoteData({ ...newQuoteData, categoryId: id })
-  }
+  const quotes = api.quote.all.useQuery({page})
 
   return (
     <div className="bg-gray-100 px-6 py-8">
@@ -36,13 +28,17 @@ const Quotes = () => {
             <PostFilter />
           </div>
           <div className="mt-16">
-            <CreatePost categoryList={categories?.data?.data}/>
+            <CreatePost categoryList={categories?.data?.data} />
           </div>
           <div className="mt-16">
-            <PostList list={quotes.data?.data}/>
-          </div>  
+            <PostList list={quotes.data?.data.quotes} />
+          </div>
           <div className="mt-8">
-            <Pagination />
+            <Pagination
+              currentPage={quotes.data?.data.mate.currentPage}
+              pageCount={quotes.data?.data.mate.totalPageCount}
+              handleOnChangePage={setPage}
+            />
           </div>
         </div>
         {/*Right side*/}
@@ -53,7 +49,7 @@ const Quotes = () => {
           </div>
           <div className="mt-10 px-8">
             <h1 className="mb-4 text-xl font-bold text-gray-700">Categories</h1>
-            <CategoryList list={categories?.data?.data}/>
+            <CategoryList list={categories?.data?.data} />
           </div>
           <div className="mt-10 px-8">
             <h1 className="mb-4 text-xl font-bold text-gray-700">
