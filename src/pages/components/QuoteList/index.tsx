@@ -1,5 +1,5 @@
 import { SingleQuote } from 'y/pages/components/SingleQuote'
-import { SingleQuoteData } from 'y/types'
+import { type SingleQuoteData } from 'y/types'
 
 export type QuoteListProps = {
   quotes?: SingleQuoteData[]

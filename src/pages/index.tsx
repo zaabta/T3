@@ -9,17 +9,22 @@ import { useRouter } from "next/router";
 const Home: NextPage = () => {
   const router = useRouter()
   const handleOnSubmit = async (e:FormEvent) => {
-    e.preventDefault()
+    try {
+      e.preventDefault()
     const userDateObj = Object.fromEntries(new FormData(e.target as HTMLFormElement)) 
     const input = await loginSchema.safeParseAsync(userDateObj)
     if(!input.success) input.error.errors.map(err => toast.error(err.message))
     else {
       const res = await signIn("credentials", {...userDateObj, redirect: false})
       if(!res?.ok) toast.error("Could not login please check your account name or email and password")
-      else {
-        toast.success("login successfully")
-        router.push("/quote")
-      }
+      else 
+        router.push("/quote").then(()=> toast.success("login successfully")).catch((err)=>{
+          console.log("ERORR->",err)
+          toast.error("something wrong !")
+        })
+    }
+    } catch(err){
+      console.log("ERROR->", err)
     }
   }
 
@@ -55,7 +60,7 @@ const Home: NextPage = () => {
                     <input type="submit" value="Log In" className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8"/>
                 </form>
                 <div className="text-center pt-12 pb-12">
-                    <p>Don't have an account? <Link href="/register" className="underline font-semibold">Register here.</Link></p>
+                    <p>{"Don't have an account?"} <Link href="/register" className="underline font-semibold">Register here.</Link></p>
                 </div>
             </div>
 

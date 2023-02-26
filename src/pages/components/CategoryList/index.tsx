@@ -1,4 +1,4 @@
-import { CategoryProps } from 'y/types'
+import { type CategoryProps } from 'y/types'
 
 export const CategoryList = ({ list }: CategoryProps) => {
   return (

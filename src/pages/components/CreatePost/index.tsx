@@ -30,9 +30,8 @@ export const CreatePost = ({ categoryList }: Props) => {
       setQuoteData({ title: '', categoryId: '', content: '' })
     },
   })
-  const createQuote = async () => {
-    
-    const input = await quoteInput.safeParse(quoteData)
+  const createQuote = (): void => {
+    const input = quoteInput.safeParse(quoteData)
     console.log(quoteData)
     if (input.success) {
       mutate(input.data)

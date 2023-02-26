@@ -10,7 +10,6 @@ import { verify } from "argon2";
 import { prisma } from "y/server/db";
 import { loginSchema } from "y/types";
 import { env } from "y/env.mjs";
-import { chownSync } from "fs";
 
 
 /**
@@ -23,8 +22,8 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      name: String;
-      email: String;
+      name: string;
+      email: string;
     } & DefaultSession["user"];
   }
   
@@ -41,11 +40,9 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: ({ token, user }) => {
       if (user) {
         token.id = user.id;
-        token.email = user.email;
-        token.name = user.username; 
       }
       return token;
     },
@@ -72,7 +69,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: "jsmith",
         },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         try {
           const creds = await loginSchema.parseAsync(credentials) as {account: string, password: string};
           const exists = await prisma.user.findFirst({

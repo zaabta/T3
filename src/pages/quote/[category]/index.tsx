@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router'
+
 import { api } from 'y/utils/api'
 import { Menu } from 'y/pages/components/menu'
 
 const Quotes = () => {
-  const router = useRouter()
+  
   const categories = api.category.all.useQuery()
   const qoutes = api.quote.all.useQuery({ page: 2 })
   return (

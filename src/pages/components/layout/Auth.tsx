@@ -12,14 +12,15 @@ export const Auth = ({ children }: Props): JSX.Element => {
   const { data: session, status } = useSession()
 
   useEffect(() => {
-    console.log(status, session)
     if (status === 'loading' || !router.isReady) return
     if (status === 'unauthenticated') {
-      toast.error('login please !')
-      router.push({
-        pathname: '/',
-        query: { returnUrl: router.asPath },
-      })
+      router
+        .push({
+          pathname: '/',
+          query: { returnUrl: router.asPath },
+        })
+        .then(() => toast.error('login please !'))
+        .catch((err) => toast.error('something wrong !'))
     }
   }, [router, status])
   if (status == 'loading') {

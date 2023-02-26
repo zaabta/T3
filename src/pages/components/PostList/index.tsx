@@ -1,5 +1,5 @@
 import { Post } from '../SinglePost'
-import { SingleQuoteData } from 'y/types'
+import { type SingleQuoteData } from 'y/types'
 
 type Props = {
   list: SingleQuoteData[]

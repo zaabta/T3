@@ -1,0 +1,12 @@
+{
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "ignore-params",
+        "ignore-properties"
+      ]
+    },
+    "minLength": 0,
+    "maxLength": 2
+  }

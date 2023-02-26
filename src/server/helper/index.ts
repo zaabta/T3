@@ -1,12 +1,12 @@
-import { Response } from "y/types";
+import { type Response } from "y/types";
 
 export const successResponse = function (
   status: number = 200,
   messages: string = "",
-  data: any[] | {} = [],
+  data: any[] | object = [],
   extras: object = {}
 ): Response {
-  var response: Response = {
+  let response: Response = {
     status,
     success: true,
     data ,

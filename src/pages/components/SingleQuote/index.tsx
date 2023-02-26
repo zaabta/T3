@@ -1,7 +1,6 @@
-import { SingleQuoteProps } from 'y/types'
+import { type SingleQuoteProps } from 'y/types'
 
 export const SingleQuote = ({
-  id,
   text,
   date,
   category,
