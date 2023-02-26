@@ -1,9 +1,6 @@
 import { api } from 'y/utils/api'
 import { useState } from 'react'
-import { quoteInput } from 'y/types'
-import { toast } from 'react-hot-toast'
 import { PostFilter } from '../components/PostFilter'
-import { Post } from '../components/SinglePost'
 import { Pagination } from '../components/Pagination'
 import { UserList } from '../components/UserList'
 import { CategoryList } from '../components/CategoryList'
@@ -12,11 +9,9 @@ import { CreatePost } from '../components/CreatePost'
 import { PostList } from '../components/PostList'
 
 const Quotes = () => {
-  const [ page, setPage] = useState<number>(1)
+  const [page, setPage] = useState<number>(1)
   const categories = api.category.all.useQuery()
-
-  const quotes = api.quote.all.useQuery({page})
-
+  const quotes = api.quote.all.useQuery({ page })
   return (
     <div className="bg-gray-100 px-6 py-8">
       <div className="flex justify-between container mx-auto">
