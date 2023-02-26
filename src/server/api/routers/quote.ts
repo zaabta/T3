@@ -188,18 +188,29 @@ export const quoteRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const quotes = await ctx.prisma.quote.findMany({
         where: {
-          categoryId: input.name,
+          category:{
+            name: input.name,
+            deletedAt: null,
+          },
           deletedAt: null,
         },
         select: {
           id: true,
+          title: true,
           content: true,
+          createdAt: true,
           category: {
             select: {
               id: true,
               name: true,
             },
           },
+          user:{
+            select:{
+              id: true,
+              username: true
+            }
+          }
         },
       });
       return quotes

@@ -7,6 +7,7 @@ import { CategoryList } from '../components/CategoryList'
 import { RecentPost } from '../components/RecentPost'
 import { CreatePost } from '../components/CreatePost'
 import { PostList } from '../components/PostList'
+import { Cookies } from '../components/Cookies'
 
 const Quotes = () => {
   const [page, setPage] = useState<number>(1)
@@ -54,6 +55,7 @@ const Quotes = () => {
           </div>
         </div>
       </div>
+      <Cookies />
     </div>
   )
 }
