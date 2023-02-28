@@ -37,11 +37,6 @@ const Quotes = () => {
           <h1 className="mb-4 text-xl font-bold text-gray-700">Categories</h1>
           <CategoryList list={categories?.data?.data} />
         </div>
-        <div className="mt-10 px-8">
-          <h1 className="mb-4 text-xl font-bold text-gray-700">
-            Recent Post
-          </h1>
-        </div>
       </div>
     </div>
   </div>

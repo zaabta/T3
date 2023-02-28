@@ -30,9 +30,9 @@ export const Post = ({ title, contnet, date, user, category }: PostProps) => {
         <p className="mt-2 text-gray-600">{contnet}</p>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <a className="text-blue-500 hover:underline" href="#">
+        <label className="text-blue-500 hover:underline cursor-pointer  ">
           Read more
-        </a>
+        </label>
         <div>
           <a className="flex items-center" href="#">
             <img
