@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { type CategoryProps } from 'y/types'
-import { useRouter } from 'next/router'
 
 export const CategoryList = ({ list }: CategoryProps) => {
-  const router = useRouter()
   return (
     <div className="flex flex-col bg-white px-4 py-6 max-w-sm mx-auto rounded-lg shadow-md">
       <ul className="">

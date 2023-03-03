@@ -10,6 +10,8 @@ README.md
 
 # When adding additional environment variables, the schema in "/src/env.mjs"
 # should be updated accordingly.
+# When adding additional environment variables, the schema in "/src/env.mjs"
+# should be updated accordingly.
 
 # Prisma
 # https://www.prisma.io/docs/reference/database-reference/connection-urls#env
@@ -22,6 +24,16 @@ DATABASE_URL="mysql://admin:ali737351699@quote.c3m2kaqu48xu.us-east-1.rds.amazon
 # NEXTAUTH_SECRET=""
 NEXTAUTH_URL="http://localhost:3000"
 JWT_SECRET="md923y8e"
+
+
+# Next Auth Discord Provider
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
+
+
+SKIP_ENV_VALIDATION = 0
+NEXT_TELEMETRY_DISABLED= 1
+
 
 
 

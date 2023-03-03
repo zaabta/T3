@@ -67,7 +67,7 @@ model User {
 
 model Quote {
     id         String     @id @default(cuid())
-    title      String
+    title      String  
     content    String
     user       User       @relation(fields: [userId], references: [id])
     userId     String

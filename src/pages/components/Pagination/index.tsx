@@ -4,12 +4,12 @@ type PaginationProps = {
   handleOnChangePage: (page: number) => void
 }
 
+
 export const Pagination = ({
   pageCount,
   currentPage,
   handleOnChangePage,
 }: PaginationProps) => {
-  console.log(currentPage)
   return (
     <ul className="flex">
       <li
@@ -53,3 +53,5 @@ export const Pagination = ({
     </ul>
   )
 }
+
+
