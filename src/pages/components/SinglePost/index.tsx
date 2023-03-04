@@ -5,7 +5,7 @@ const Post = ({ title, contnet, date, user, category }: PostProps) => {
     <div className="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md  mt-5 mb-5">
       <div className="flex justify-between items-center">
         <span className="font-light text-gray-600">
-          {date.toString().substring(0, 10)}
+          {date.toISOString().substring(0, 10)}
         </span>
         <a
           className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
