@@ -39,7 +39,7 @@ const CreatePost = ({ categoryList }: Props) => {
     <div className="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center">
         <span className="font-light text-gray-600">
-          {new Date().toString().substring(0, 10)}
+          {new Date().toDateString().substring(0,10)}
         </span>
         <div>
           <select className="block bg-gray-600 text-white font-bold py-2 px-3 rounded-lg focus:outline-none md:py-3"
