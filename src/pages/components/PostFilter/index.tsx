@@ -1,4 +1,4 @@
-export const PostFilter = () => {
+const PostFilter = () => {
   return (
     <div>
       <select className="block bg-gray-300 text-gray-700 py-2 px-2 rounded-lg focus:outline-none md:py-3">
@@ -8,3 +8,5 @@ export const PostFilter = () => {
     </div>
   )
 }
+
+export default PostFilter;

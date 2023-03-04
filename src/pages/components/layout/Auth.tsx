@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactElement
 }
 
-export const Auth = ({ children }: Props): JSX.Element => {
+const Auth = ({ children }: Props): JSX.Element => {
   const router = useRouter()
   const { data: session, status } = useSession()
 
@@ -28,3 +28,5 @@ export const Auth = ({ children }: Props): JSX.Element => {
   }
   return status === 'authenticated' ? <>{children}</> : <></>
 }
+
+export default Auth;

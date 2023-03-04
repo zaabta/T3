@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { type CategoryProps } from 'y/types'
 
-export const CategoryList = ({ list }: CategoryProps) => {
+const CategoryList = ({ list }: CategoryProps) => {
   return (
     <div className="flex flex-col bg-white px-4 py-6 max-w-sm mx-auto rounded-lg shadow-md">
       <ul className="">
@@ -27,3 +27,5 @@ export const CategoryList = ({ list }: CategoryProps) => {
     </div>
   )
 }
+
+export default CategoryList;

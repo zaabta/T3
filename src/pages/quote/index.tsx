@@ -1,13 +1,13 @@
 import { api } from 'y/utils/api'
 import { useState } from 'react'
-import { PostFilter } from '../components/PostFilter'
-import { Pagination } from '../components/Pagination'
-import { UserList } from '../components/UserList'
-import { CategoryList } from '../components/CategoryList'
-import { RecentPost } from '../components/RecentPost'
-import { CreatePost } from '../components/CreatePost'
-import { PostList } from '../components/PostList'
-import { Cookies } from '../components/Cookies'
+import PostFilter from '../components/PostFilter'
+import Pagination  from '../components/Pagination'
+import UserList from '../components/UserList'
+import CategoryList  from '../components/CategoryList'
+import RecentPost  from '../components/RecentPost'
+import CreatePost  from '../components/CreatePost'
+import PostList  from '../components/PostList'
+import Cookies  from '../components/Cookies'
 
 const Quotes = () => {
   const [page, setPage] = useState<number>(1)

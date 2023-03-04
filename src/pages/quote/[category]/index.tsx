@@ -1,8 +1,8 @@
 import { api } from 'y/utils/api'
-import { PostFilter } from 'y/pages/components/PostFilter'
-import { CreatePost } from 'y/pages/components/CreatePost'
-import { PostList } from 'y/pages/components/PostList'
-import { CategoryList } from 'y/pages/components/CategoryList'
+import PostFilter from 'y/pages/components/PostFilter'
+import CreatePost  from 'y/pages/components/CreatePost'
+import PostList  from 'y/pages/components/PostList'
+import CategoryList from 'y/pages/components/CategoryList'
 import { useRouter } from 'next/router'
 
 const Quotes = () => {

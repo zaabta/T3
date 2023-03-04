@@ -1,22 +1,19 @@
 import { api } from 'y/utils/api'
-import { quoteInput } from 'y/types'
+import { quoteInput, type Category  } from 'y/types'
 import { toast } from 'react-hot-toast'
 import { useState } from 'react'
-import { Category } from 'y/types'
 
 type Props = {
   categoryList?: Category[]
 }
 
-interface QuoteData {
-  title: string;
-  content: string;
-  categoryId: string;
-}
-
-export const CreatePost = ({ categoryList }: Props) => {
+const CreatePost = ({ categoryList }: Props) => {
   const trpc = api.useContext()
-  const [quoteData, setQuoteData] = useState<QuoteData>({
+  const [quoteData, setQuoteData] = useState<{
+    title: string;
+    content: string;
+    categoryId: string;
+  }>({
     title: '',
     content: '',
     categoryId: '',
@@ -77,3 +74,5 @@ export const CreatePost = ({ categoryList }: Props) => {
     </div>
   )
 }
+
+export default CreatePost;

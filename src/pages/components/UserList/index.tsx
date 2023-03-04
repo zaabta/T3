@@ -1,4 +1,4 @@
-export const UserList = () => {
+const UserList = () => {
   return (
     <div className="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md">
       <ul className="-mx-4">
@@ -100,3 +100,5 @@ export const UserList = () => {
     </div>
   )
 }
+
+export default UserList;

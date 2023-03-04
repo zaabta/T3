@@ -94,3 +94,12 @@ export type SingleQuoteData = {
   createdAt: Date,
   user: UserData
 }
+
+export type PostProps = {
+  title: string
+  contnet: string
+  date: Date
+  category: { id: string; name: string }
+  user: { username: string; img?: string }
+}
+

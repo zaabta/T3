@@ -1,4 +1,4 @@
-export const RecentPost = () => {
+const RecentPost = () => {
   return (
     <div className="flex flex-col bg-white px-8 py-6 max-w-sm mx-auto rounded-lg shadow-md">
       <div className="flex justify-center items-center">
@@ -33,3 +33,5 @@ export const RecentPost = () => {
     </div>
   )
 }
+
+export default RecentPost

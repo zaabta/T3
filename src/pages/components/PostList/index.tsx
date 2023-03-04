@@ -1,12 +1,11 @@
-import { Post } from '../SinglePost'
+import Post from '../SinglePost'
 import { type SingleQuoteData } from 'y/types'
 
 type Props = {
   list: SingleQuoteData[]
 }
 
-export const PostList = ({ list }: Props) => {
-  console.log(list)
+const PostList = ({ list }: Props) => {
   return (
     <>
       {list?.map(({ id, title, content, category, createdAt, user }) => (
@@ -22,3 +21,5 @@ export const PostList = ({ list }: Props) => {
     </>
   )
 }
+
+export default PostList;

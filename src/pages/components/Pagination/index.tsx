@@ -5,7 +5,7 @@ type PaginationProps = {
 }
 
 
-export const Pagination = ({
+const Pagination = ({
   pageCount,
   currentPage,
   handleOnChangePage,
@@ -54,4 +54,4 @@ export const Pagination = ({
   )
 }
 
-
+export default Pagination;

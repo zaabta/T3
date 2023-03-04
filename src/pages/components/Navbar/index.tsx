@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const Navbar = () => {
+const Navbar = () => {
     const [isOpen , serIsOpen] = useState<boolean>(false)
     return(
         <nav className="bg-white px-6 py-4 shadow">
@@ -26,3 +26,5 @@ export const Navbar = () => {
     </nav>
     )
 }
+
+export default Navbar;

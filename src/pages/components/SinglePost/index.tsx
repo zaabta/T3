@@ -1,12 +1,6 @@
-type PostProps = {
-  title: string
-  contnet: string
-  date: Date
-  category: { id: string; name: string }
-  user: { username: string; img?: string }
-}
+import { type PostProps } from "y/types";
 
-export const Post = ({ title, contnet, date, user, category }: PostProps) => {
+const Post = ({ title, contnet, date, user, category }: PostProps) => {
   return (
     <div className="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md  mt-5 mb-5">
       <div className="flex justify-between items-center">
@@ -52,3 +46,5 @@ export const Post = ({ title, contnet, date, user, category }: PostProps) => {
     </div>
   )
 }
+
+export default Post;

@@ -22,6 +22,5 @@ const config = {
   },
   output: "standalone",
   ignoreBuildErrors: true,
-  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
 };
 export default config;

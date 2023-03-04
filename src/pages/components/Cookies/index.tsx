@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const Cookies = () => {
+const Cookies = () => {
     const [display, setDisplay] = useState<boolean>(true)
   return (
     <section className={`${!display && " hidden"} fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-gray-800 right-12 bottom-16 dark:border-gray-700 rounded-2xl`}>
@@ -30,3 +30,5 @@ export const Cookies = () => {
     </section>
   )
 }
+
+export default Cookies;

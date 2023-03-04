@@ -1,4 +1,4 @@
-export const Footer = ()=> {
+const Footer = ()=> {
     return(
         <footer className="w-full px-6 py-2 bg-gray-800 text-gray-100">
         <div className="flex flex-col justify-between items-center container mx-auto md:flex-row">
@@ -25,3 +25,5 @@ export const Footer = ()=> {
     </footer>
     )
 }
+
+export default Footer;

@@ -3,9 +3,9 @@ import { api } from "y/utils/api";
 import "y/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { type AppPropsWithAuth } from "y/types";
-import { Auth } from "y/pages/components/layout/Auth";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import Auth  from "y/pages/components/layout/Auth";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const MyApp = ({
   Component,
