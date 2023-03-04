@@ -36,10 +36,10 @@ const Post = ({ title, contnet, date, user, category }: PostProps) => {
                 'https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png'
               }
               className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-              alt={user.username}
+              alt={user?.username}
             />
             <h1 className="text-gray-700 font-bold hover:underline">
-              {user.username}
+              {user?.username}
             </h1>
           </a>
         </div>
