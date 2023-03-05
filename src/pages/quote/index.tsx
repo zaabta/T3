@@ -21,7 +21,7 @@ const Quotes = () => {
             <h1 className="text-xl font-bold text-gray-700 md:text-2xl">
               Quote
             </h1>
-            <PostFilter />
+            <PostFilter list={categories?.data?.data}/>
           </div>
           <div className="mt-16">
             <CreatePost categoryList={categories?.data?.data} />

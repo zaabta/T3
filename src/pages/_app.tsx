@@ -13,17 +13,15 @@ const MyApp = ({
 }:AppPropsWithAuth) => {
   return (
     <SessionProvider session={session}>
+      <Navbar/>
       {
         Component.requireAuth ? (
           <Auth>
-            <>
-              <Navbar/>
               <Component {...pageProps} />
-              <Footer/>
-            </>
           </Auth>
         ): (<Component {...pageProps} />)
       }
+      <Footer/>
       <Toaster />
     </SessionProvider>
   );

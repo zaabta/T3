@@ -103,3 +103,10 @@ export type PostProps = {
   user: { username: string; img?: string }
 }
 
+export type author = {
+  id: string,
+  name: string,
+  avatar?: string,
+  quotes: number
+}
+

@@ -11,9 +11,9 @@ const Pagination = ({
   handleOnChangePage,
 }: PaginationProps) => {
   return (
-    <ul className="flex">
+    <ul className="flex flex-row items-center h-20 overflow-x-scroll ">
       <li
-        className="mx-1 px-3 py-2 bg-gray-200 text-gray-500 rounded-lg cursor-pointer hover:bg-gray-700 hover:text-gray-200"
+        className="mx-1 h-10 px-3 py-2 bg-gray-200 text-gray-500 rounded-lg cursor-pointer hover:bg-gray-700 hover:text-gray-200"
         onClick={() => {
           currentPage - 1 > 0 && handleOnChangePage(currentPage - 1)
         }}
@@ -27,21 +27,21 @@ const Pagination = ({
           <li
             key={count}
             onClick={() => handleOnChangePage(count)}
-            className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg cursor-pointer"
+            className="mx-1  h-10 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg cursor-pointer"
           >
             <label className="font-bold cursor-pointer">{count}</label>
           </li>
         ) : (
           <li
             key={count}
-            className="mx-1 px-3 py-2 bg-gray-700 text-gray-200 rounded-lg cursor-pointer"
+            className="mx-1  h-10 px-3 py-2 bg-gray-700 text-gray-200 rounded-lg cursor-pointer"
           >
             <label className="font-bold cursor-pointer">{count}</label>
           </li>
         ),
       )}
       <li
-        className="mx-1 px-3 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg cursor-pointer"
+        className="mx-1 px-3  h-10 py-2 bg-gray-200 text-gray-700 hover:bg-gray-700 hover:text-gray-200 rounded-lg cursor-pointer"
         onClick={() => {
           currentPage + 1 <= pageCount && handleOnChangePage(currentPage + 1)
         }}
