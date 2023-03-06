@@ -66,7 +66,7 @@ export type SingleQuoteProps = {
   id? : string,
   text: string,
   date: Date,
-  user: UserData,
+  user?: UserData,
   category: {id: string, name: string}
 }
 

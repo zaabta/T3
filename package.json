@@ -19,6 +19,7 @@
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
     "argon2": "^0.30.3",
+    "aws": "^0.0.3-2",
     "moment": "^2.29.4",
     "next": "13.1.6",
     "next-auth": "^4.19.0",
